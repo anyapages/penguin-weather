@@ -70,7 +70,7 @@ The `PenguinWeather` component consists of the following elements:
 
 ## Live Demo
 
-Try the live demo of the Tic-Tac-Toe app: [Demo](http://anyaparanya.com/penguin-weather)
+Try the live demo of the Penguin's Weather Report: [Demo](http://anyaparanya.com/penguin-weather)
 
 
 ## Screenshots
