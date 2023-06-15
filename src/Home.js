@@ -4,12 +4,12 @@ import { FaThermometerThreeQuarters } from 'react-icons/fa';
 import { FaSnowflake } from 'react-icons/fa';
 import "./index.css";
 
-// SpeechBubble component to display text within a speech bubble container
 const SpeechBubble = ({ text }) => (
   <div className="speech-bubble">
     <span>{text}</span>
   </div>
 );
+
 class PenguinWeather extends Component {
   state = {
     weather: null,
@@ -29,7 +29,7 @@ class PenguinWeather extends Component {
 
   setSeason = () => {
     const random = Math.random(); // Generate a random number between 0 and 1
-  
+
     if (random < 0.5) {
       // Random number is less than 0.5, set season as summer
       this.setState({ season: 'summer', isLightOn: true });
@@ -62,42 +62,49 @@ class PenguinWeather extends Component {
       const { season, isLightOn } = this.state;
       const weatherConditions = {
         summer: {
-          sunny: ['Sunny and warm at 25°C', 'Hot with a slight breeze', 'Clear skies and perfect for swimming'],
-          cloudy: ['Cloudy with a chance of showers', 'Partly cloudy with a gentle breeze', 'Warm with scattered clouds'],
+          sunny: ['Sunny and warm at 25°C', 'Hot with a slight breeze', 'Clear skies and perfect for swimming', 'Partly cloudy with a gentle breeze', 'Warm with scattered clouds'],
+          cloudy: ['Cloudy with a chance of showers', 'Partly cloudy with a cool breeze', 'Overcast skies and mild temperatures', 'Slightly cloudy with a gentle wind'],
         },
         winter: {
-          sunny: ['Snowy with a temperature of -5°C', 'Cold and frosty', 'Bundle up! Snow is falling'],
-          cloudy: ['Cloudy with a chance of snow flurries', 'Overcast skies and chilly temperatures', 'Stay indoors, it might snow'],
+          cloudy: ['Snowy with a temperature of -5°C', 'Cold and frosty', 'Bundle up! Snow is falling', 'Cloudy with a chance of snow flurries', 'Overcast skies and chilly temperatures', 'Stay indoors, it might snow'],
+          sunny: ['Sunny but freezing with temperatures below zero', 'Cold and clear with a biting wind', 'Bright sunshine with icy conditions', 'Chilly but sunny with no chance of snow'],
         },
       };
   
       const currentWeatherConditions = weatherConditions[season];
       if (currentWeatherConditions) {
         const weatherOptions = currentWeatherConditions[isLightOn ? 'sunny' : 'cloudy'];
-        const randomWeather = weatherOptions[Math.floor(Math.random() * weatherOptions.length)];
+        if (weatherOptions && weatherOptions.length > 0) {
+          const randomWeather = weatherOptions[Math.floor(Math.random() * weatherOptions.length)];
   
-        setTimeout(() => {
-          this.setState({ weather: randomWeather, isFetchingWeather: false });
-        }, 1500);
+          setTimeout(() => {
+            this.setState({ weather: randomWeather, isFetchingWeather: false });
+          }, 1500);
+        } else {
+          console.log(`No weather options available for the season "${season}" and light condition "${isLightOn ? 'sunny' : 'cloudy'}".`);
+          this.setState({ weather: null, isFetchingWeather: false });
+        }
       } else {
         console.log(`Weather conditions for the season "${season}" are not defined.`);
+        this.setState({ weather: null, isFetchingWeather: false });
       }
     }
-  }; 
-
+  };
+  
   turnLightOn = () => {
-    this.setState({ isLightOn: true });
+    this.setState({ isLightOn: true, season: 'summer' });
   };
-
+  
   turnLightOff = () => {
-    this.setState({ isLightOn: false });
-  };
+    this.setState({ isLightOn: false, season: 'winter' });
+  };  
 
   render() {
     const { weather, isFetchingWeather, season, isLightOn } = this.state;
 
     return (
       <div>
+        <h3 style={{ textAlign: "center" }}>Welcome to Penguin's Weather Report!</h3>
         <div>
           <button title="sunny" onClick={this.turnLightOn} className="main-btn"><FaThermometerThreeQuarters /></button>
           &nbsp; &nbsp;
@@ -105,11 +112,22 @@ class PenguinWeather extends Component {
         </div>
 
         <div id="bulb" className={isLightOn ? "bulb-container on" : "bulb-container"}></div>
-        <h3 style={{ textAlign: "center" }}>Welcome to Penguin's Weather Report!</h3>
-    
+
+        <div>
+          <button className="main-btn" onClick={this.handleClick} disabled={isFetchingWeather}>
+            {isFetchingWeather ? 'Fetching Weather...' : `Check Penguin's Weather`}
+          </button>
+          {weather && (
+            <div className="weather-response">
+              <SpeechBubble text={`The penguin asks: "Is it ${isLightOn ? 'Summer' : 'Winter'} today?"`} />
+              <br></br>
+              <SpeechBubble text={weather} />
+            </div>
+          )}
+        </div>
+
         <div className="penguin-container">
           {/* Penguin SVG code */}
-      
           <div className="penguin">
             <div className="penguin-bottom">
               <div className="right-hand"></div>
@@ -138,25 +156,11 @@ class PenguinWeather extends Component {
         </div>
 
         <br />
-
-        <div>
-          <button className="main-btn" onClick={this.handleClick} disabled={isFetchingWeather}>
-            {isFetchingWeather ? 'Fetching Weather...' : `Check Penguin's Weather`}
-          </button>
-          {weather && (
-            <div className="weather-response">
-              <SpeechBubble text={`The penguin asks: "Is it ${isLightOn ? 'Summer' : 'Winter'} today?"`} />
-              <SpeechBubble text={weather} />
-            </div>
-          )}
-        </div>
-
-        <br />
         <br />
 
-        <footer className="footer-content">
-          <p className="mt-"><i className="fa fa-code"></i>&nbsp;&nbsp;with&nbsp;&nbsp;<i className="fa fa-heart"></i>&nbsp;&amp;&nbsp;&nbsp;<i className="fa fa-coffee"></i></p>
-          <p>© {new Date().getFullYear()} <a href="https://anyaparanya.com" className="link-grey" target="_blank" rel="nofollow">anyaParanya</a></p>
+        <footer >
+
+          <p className="footer">© {new Date().getFullYear()} <a href="https://anyaparanya.com" className="link-grey">anyaParanya</a></p>
         </footer>
       </div>
     );
