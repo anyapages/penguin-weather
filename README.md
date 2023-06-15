@@ -68,6 +68,8 @@ The `PenguinWeather` component consists of the following elements:
 - A loading state is displayed while fetching the weather information.
 - The component includes a footer with attribution to the author.
 
+Feel free to customise the component and add additional features as needed.
+
 ## Live Demo
 
 Try the live demo of the Penguin's Weather Report: [Demo](http://anyaparanya.com/penguin-weather)
@@ -76,5 +78,3 @@ Try the live demo of the Penguin's Weather Report: [Demo](http://anyaparanya.com
 ## Screenshots
 
 ![penguin-weather](preview.png)
-
-Feel free to customise the component and add additional features as needed.
