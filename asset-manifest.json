@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/penguin-weather/static/css/main.ff70d512.css",
+    "main.css": "/penguin-weather/static/css/main.adc4b4b4.css",
     "main.js": "/penguin-weather/static/js/main.693b5298.js",
     "static/media/fa-solid-900.svg": "/penguin-weather/static/media/fa-solid-900.7a8b4f130182d19a2d7c.svg",
     "static/media/fa-brands-400.svg": "/penguin-weather/static/media/fa-brands-400.2f517e09eb2ca6650ff5.svg",
@@ -21,11 +21,11 @@
     "index.html": "/penguin-weather/index.html",
     "static/media/arrow_left.svg": "/penguin-weather/static/media/arrow_left.db6e2d88c7c35a775ce4.svg",
     "static/media/arrow_right.svg": "/penguin-weather/static/media/arrow_right.f7c6ac6d310d3b82f0a0.svg",
-    "main.ff70d512.css.map": "/penguin-weather/static/css/main.ff70d512.css.map",
+    "main.adc4b4b4.css.map": "/penguin-weather/static/css/main.adc4b4b4.css.map",
     "main.693b5298.js.map": "/penguin-weather/static/js/main.693b5298.js.map"
   },
   "entrypoints": [
-    "static/css/main.ff70d512.css",
+    "static/css/main.adc4b4b4.css",
     "static/js/main.693b5298.js"
   ]
 }
